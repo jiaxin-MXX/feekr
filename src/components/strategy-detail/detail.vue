@@ -1,6 +1,6 @@
 <template>
     <div v-if="show" class="theme-container guide-theme-list-container theme-mode detail-container">
-                <header class="header-title-wrap txt-center font-lg regular-font">
+                <header v-if='data.title' class="header-title-wrap txt-center font-lg regular-font">
                     <span>-</span>
                     <span class="section-title">{{data.title}}</span>
                     <span>-</span>
@@ -45,6 +45,7 @@ export default {
     },
     watch: {
         data(){
+            console.log(this.data.theme)
             if(!this.data.theme.length){
                 this.show=false
             }

@@ -1,5 +1,5 @@
 <template>
-     <a class="theme-item theme-item-city" href="javascript:void(0)"
+     <a @click="handleclick(value.id)" class="theme-item theme-item-city" href="javascript:void(0)"
                     data-target="position">
                     <div class="thumb-wrap">
                         <img :data-original='value.cover+"!640X270"'
@@ -20,7 +20,12 @@
 
 <script>
 export default {
-    props:['value']
+    props:['value'],
+    methods: {
+        handleclick(id){
+             this.$router.push({name:'guide',params:{id,path:'themedetail'}})
+        }
+    },
 }
 </script>
 <style lang="stylus" scoped>

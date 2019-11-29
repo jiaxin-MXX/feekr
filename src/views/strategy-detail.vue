@@ -10,7 +10,7 @@
             </div>
             <div class="guide-nav">
                 <nav class="table-mode">
-                    <a v-for="value in guidecategory" :key="value.id" class="menu table-cell" href="javascript:void(0)"
+                    <a v-for="value in guidecategory" @click="click(value.id)" :key="value.id" class="menu table-cell" href="javascript:void(0)"
                         data-target="clear">
                          <p class="cate-icon"><img :src="value.img" alt=""></p>
                         <p class="cate-name font-sm"><span class="nav-name">{{value.title}}</span></p>
@@ -40,7 +40,8 @@ export default {
             articlelist:{},
             shoplist:{},
             nearby:{},
-            source: null
+            source: null,
+            list:['meijing','meishi','meisu','meiwu']
         }
     },
     cancelQuest() {
@@ -65,6 +66,7 @@ export default {
         return result.data.result.list
     },
     async created() {
+        
         this.$store.commit('setbottom',false)
         var id=this.$route.params.id
         let result=await this.$options.getdata({
@@ -149,6 +151,11 @@ export default {
         }
         this.$store.commit('settype',false)
         next()
+    },
+    methods: {
+        click(cid){
+            this.$router.push({name:this.list[cid-1],params:{id:this.$route.params.id,cid}})
+        }
     },
     watch: {
         async '$route.params.id'(){

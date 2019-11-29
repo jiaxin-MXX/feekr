@@ -21,7 +21,7 @@ export default {
     props:['value'],
     methods: {
         handleclick(id){
-            this.$router.push({name:'guide',params:{id}})
+            this.$router.push({name:'guide',params:{id,path:'pathdetail'}})
         }
     },
 }

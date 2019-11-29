@@ -7,6 +7,13 @@ import Strategy from 'views/strategy'
 import Mine from 'views/mine'
 import Detail2 from 'views/strategy-detail'
 import Guide from 'views/guide'
+import Article from 'views/article'
+
+import Themelist from 'views/themelist'
+import Meijing from 'components/themelist/meijing'
+import Meishi from 'components/themelist/meishi'
+import Meisu from 'components/themelist/meisu'
+import Meiwu from 'components/themelist/meiwu'
 
 import Product from 'views/product'
 import Contain from 'components/product/contain'
@@ -43,6 +50,39 @@ const routes = [
     path:'/Sdetail/:id',
     name:'Sdetail',
     component: Detail2
+  },
+  {
+    path:'/article/:id',
+    name:'article',
+    component: Article
+  },
+  {
+    path:'/themelist/:id',
+    name:'themelist',
+    component: Themelist,
+    redirect:'/themelist/:id/meijing/1',
+    children:[
+      {
+        path:'meijing/:cid',
+        name:'meijing',
+        component:Meijing
+      },
+      {
+        path:'meishi/:cid',
+        name:'meishi',
+        component:Meishi
+      },
+      {
+        path:'meisu/:cid',
+        name:'meisu',
+        component:Meisu
+      },
+      {
+        path:'meiwu/:cid',
+        name:'meiwu',
+        component:Meiwu
+      }
+    ]
   },
   {
     path:'/guide/:id',

@@ -12,12 +12,21 @@
             </header>
             <div class="content body-space">
                 <div>
-                    <p><strong>行程总介绍：</strong>{{mydata.desc}}
+                    <p><strong v-if='$route.params.path=="pathdetail"'>行程总介绍：</strong>{{mydata.desc}}
                     </p>
-                    <p v-for="item in mydata.tips" :key="item.title"><strong>{{item.title}}：</strong>{{item.desc}}</p>
-                    <p v-for="(value,index) in mydata.path" :key="index"><strong>DAY{{index+1}}路线：</strong>{{value.join('－')}}</p>
+                    <div v-if='mydata.tips'>
+                        <p v-for="item in mydata.tips" :key="item.title"><strong>{{item.title}}：</strong>{{item.desc}}</p>
+                    </div>
+                    <div v-if='mydata.path'>
+                        <p  v-for="(value,index) in mydata.path" :key="index"><strong>DAY{{index+1}}路线：</strong>{{value.join('－')}}</p>
+                    </div>
                 </div>
-                <mysession v-for="(value,index) in mydata.play" :key="value.title" :data='value' :index='index'></mysession>
+                <div v-if='$route.params.path=="pathdetail"'>
+                    <mysession v-for="(value,index) in mydata.play" :key="value.title" :data='value' :path='"pathdetail"' :index='index'></mysession>
+                </div>
+                <div v-if='$route.params.path=="themedetail"'>
+                    <mysession v-for="(value,index) in mydata.list" :key="value.title" :data='value' :path='"themedetail"' :index='index'></mysession>
+                </div>
             </div>
         </div>
     </div>  
@@ -40,11 +49,12 @@ export default {
         this.$store.commit('setbottom',false)
         this.$store.commit('setbottom2',false)
         let result=await http.get({
-            url:'/api/guide/pathdetail',
+            url:`/api/guide/`+this.$route.params.path,
             params:{
                 id:this.$route.params.id
             }
         })
+        console.log(result.data.result)
         this.mydata=result.data.result
         this.$store.commit('settype',true)
     },

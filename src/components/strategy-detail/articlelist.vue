@@ -12,7 +12,12 @@ export default {
     props:['value'],
     methods: {
         handle(id){
-            console.log(id)
+            
+            // console.log(id)
+            this.$router.push({
+                name:'article',
+                params:{id}
+            })
         }
     },
 }
