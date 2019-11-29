@@ -1,12 +1,19 @@
 <template>
     <div id="themelist">
         <div style="overflow:hidden;height:100%;display:flex;flex-direction: column">
-            <head class="themeL">
+            <van-tabs class="themeL" v-model="active">
+                <van-tab :to="{name:'meijing',params:{cid:1}}" title="美食"></van-tab>
+                <van-tab :to="{name:'meishi',params:{cid:2}}" title="美景"></van-tab>
+                <van-tab :to="{name:'meisu',params:{cid:3}}" title="美宿"></van-tab>
+                <van-tab :to="{name:'meiwu',params:{cid:4}}" title="美物"></van-tab>
+            </van-tabs>
+            <!-- <head class="themeL">
+                
                 <router-link active-class='active' tag="div" :to="{name:'meijing',params:{cid:1}}">美食</router-link>
                 <router-link active-class='active' tag="div" :to="{name:'meishi',params:{cid:2}}">美景</router-link>
                 <router-link active-class='active' tag="div" :to="{name:'meisu',params:{cid:3}}">美宿</router-link>
                 <router-link active-class='active' tag="div" :to="{name:'meiwu',params:{cid:4}}">美物</router-link>
-            </head>
+            </head> -->
             <div class="center" style="overflow:hidden;height:100%;flex:1">
                 <router-view></router-view>
             </div>
@@ -16,10 +23,14 @@
 
 <script>
 import http from 'utils/http'
+import Vue from 'vue';
+import { Tab, Tabs } from 'vant';
+
+Vue.use(Tab).use(Tabs);
 export default {
     data() {
         return {
-            
+            active:this.$route.params.cid-1
         }
     },
     async beforeCreate() {
@@ -61,4 +72,10 @@ export default {
 .active
     color: #1abc9c
     border-bottom: 1px solid #1abc9c
+>>>.van-tabs__wrap
+    width 100%
+    >>>.van-tabs__nav--line
+        width: 100%;
+>>>.van-tabs__content
+    display none
 </style>
